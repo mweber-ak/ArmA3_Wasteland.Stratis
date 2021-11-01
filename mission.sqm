@@ -15868,7 +15868,7 @@ class Mission
 			dataType="Marker";
 			position[]={4053.5049,0,1620.141};
 			name="marker_157";
-			text="Join us on Discord @ Discord.Frac.GG";
+			text="Join us on Discord @ discord.gg/4qqWCm8ZQs";
 			type="mil_dot";
 			id=1182;
 			atlOffset=25.155952;

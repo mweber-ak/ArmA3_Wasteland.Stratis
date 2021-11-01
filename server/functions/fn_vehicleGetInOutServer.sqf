@@ -10,14 +10,7 @@ _unit setVariable ["lastVehicleRidden", netId _vehicle, true];
 
 if (_vehicle isKindOf "StaticWeapon" && owner _vehicle != owner _unit) then
 {
-	if (isNull group _vehicle) then
-	{
-		_vehicle setOwner owner _unit;
-	}
-	else
-	{
-		(group _vehicle) setGroupOwner owner _unit;
-	};
+	_vehicle setOwner owner _unit;
 };
 
 if (isPlayer _unit && owner _vehicle == owner _unit) then
@@ -33,11 +26,13 @@ _vehicle setVariable ["vehSaving_lastUse", diag_tickTime];
 	{
 		_assistOwner = _x getVariable ["A3W_driverAssistOwner", objNull];
 
+
 		if (!alive _assistOwner || _assistOwner == _unit) then
 		{
 			if (driver _vehicle == _x && lockedDriver _vehicle) then
 			{
 				[_vehicle, false] remoteExecCall ["lockDriver", 0];
+
 			};
 
 			deleteVehicle _x;

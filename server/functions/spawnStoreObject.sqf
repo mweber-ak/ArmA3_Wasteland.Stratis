@@ -23,7 +23,7 @@ _isVehStore = ["VehStore", _npcName] call fn_startsWith;
 private _storeNPC = missionNamespace getVariable [_npcName, objNull];
 private _marker = _npcName;
 
-if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVehStore}) then
+if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore}) then
 {
 	_timeoutKey = _key + "_timeout";
 	_objectID = "";
@@ -136,7 +136,7 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 			}
 			else // normal spawn
 			{
-				_safePos = _markerPos findEmptyPosition [0, 50, [_class, "B_Truck_01_transport_F"] select (!surfaceIsWater _markerPos && _seaSpawn)]; // use HEMTT in findEmptyPosition for boats on lands 
+				_safePos = _markerPos findEmptyPosition [0, 50, [_class, "B_Truck_01_transport_F"] select (!surfaceIsWater _markerPos && _seaSpawn)]; // use HEMTT in findEmptyPosition for boats on lands
 				if (count _safePos == 0) then { _safePos = _markerPos };
 				_spawnPosAGL = _safePos;
 				if (_seaSpawn) then { _safePos vectorAdd [0,0,0.05] };
@@ -175,7 +175,6 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 			_object setVariable ["A3W_purchasedStoreObject", true];
 			_object setVariable ["ownerUID", getPlayerUID _player, true];
 			_object setVariable ["ownerName", name _player, true];
-			if (isPlayer _player) then { _object setPlateNumber name _player };
 
 			private _variant = (_itemEntry select {_x isEqualType "" && {_x select [0,8] == "variant_"}}) param [0,""];
 
@@ -204,14 +203,8 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 				};
 			};
 
-			if (_skipSave) then
+			if (isPlayer _player && !(_player getVariable [_timeoutKey, true])) then
 			{
-				_object setVariable ["A3W_skipAutoSave", true, true];
-			};
-
-			if !(_player getVariable [_timeoutKey, true]) then
-			{
-				[_player, -_itemPrice] call A3W_fnc_setCMoney;
 				_player setVariable [_key, _objectID, true];
 			}
 			else // Timeout
@@ -224,7 +217,7 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 			{
 				if (!surfaceIsWater _safePos) then
 				{
-					_object setPosATL [_safePos select 0, _safePos select 1, 0.25];
+					_object setPosATL [_safePos select 0, _safePos select 1, 0.05];
 				};
 
 				_object setVelocity [0,0,0.01];
@@ -239,6 +232,8 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 
 			_object setDir (if (_object isKindOf "Plane") then { markerDir _marker } else { random 360 });
 
+
+
 			_isDamageable = !(_object isKindOf "ReammoBox_F"); // ({_object isKindOf _x} count ["AllVehicles", "Lamps_base_F", "Cargo_Patrol_base_F", "Cargo_Tower_base_F"] > 0);
 
 			[_object] call vehicleSetup;
@@ -246,7 +241,9 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 			_object setVariable ["allowDamage", _isDamageable, true];
 
 			clearBackpackCargoGlobal _object;
-
+			clearWeaponCargoGlobal _object;
+			clearMagazineCargoGlobal _object;
+			clearItemCargoGlobal _object;
 			// give diving gear to RHIB, Speedboat, and SDV
 			if ({_object isKindOf _x} count ["Boat_Transport_02_base_F","Boat_Armed_01_base_F","SDV_01_base_F"] > 0) then
 			{
@@ -275,7 +272,11 @@ if (_key != "" && _player isKindOf "Man" && {_isGenStore || _isGunStore || _isVe
 				_object addMagazineCargoGlobal ["30Rnd_556x45_Stanag", 2];
 			};
 
-			if (!_skipSave) then
+			if (_skipSave) then
+			{
+				_object setVariable ["A3W_skipAutoSave", true, true];
+			}
+			else
 			{
 				if (_object getVariable ["A3W_purchasedVehicle", false] && !isNil "fn_manualVehicleSave") then
 				{

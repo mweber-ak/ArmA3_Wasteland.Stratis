@@ -71,11 +71,6 @@ if (isServer) then
 			{
 				_unit spawn fn_ejectCorpse;
 			};
-
-			if (["A3W_playerSaving"] call isConfigOn) then
-			{
-				_uid spawn fn_deletePlayerSave;
-			};
 		};
 
 		false
@@ -86,7 +81,7 @@ if (isServer) then
 	[] execVM "server\admins.sqf";
 };
 
-call compile preprocessFileLineNumbers "server\functions\serverVars.sqf";
+[] execVM "server\functions\serverVars.sqf";
 
 if (isServer) then
 {
@@ -96,14 +91,24 @@ if (isServer) then
 
 	[] execVM "server\functions\broadcaster.sqf";
 	[] execVM "server\functions\relations.sqf";
-	[] execVM (externalConfigFolder + "\init.sqf");
+
+	if (!hasInterface) then
+	{
+		if (loadFile (externalConfigFolder + "\init.sqf") != "") then
+		{
+			[] execVM (externalConfigFolder + "\init.sqf");
+		};
+	};
 
 	waitUntil {scriptDone _serverCompileHandle};
 
 	// Broadcast server rules
-	if (loadFile (externalConfigFolder + "\serverRules.sqf") != "") then
+	if (!hasInterface) then
 	{
-		[[call compile preprocessFileLineNumbers (externalConfigFolder + "\serverRules.sqf")], "client\functions\defineServerRules.sqf"] remoteExecCall ["execVM", [-2,0] select hasInterface, true];
+		if (loadFile (externalConfigFolder + "\serverRules.sqf") != "") then
+		{
+			[[call compile preprocessFileLineNumbers (externalConfigFolder + "\serverRules.sqf")], "client\functions\defineServerRules.sqf"] remoteExecCall ["execVM", [-2,0] select hasInterface, true];
+		};
 	};
 };
 
@@ -113,14 +118,17 @@ diag_log "WASTELAND SERVER - Server Compile Finished";
 call compile preprocessFileLineNumbers "server\default_config.sqf";
 
 // load external config
-if (loadFile (externalConfigFolder + "\main_config.sqf") != "") then
+if (!hasInterface) then
 {
-	call compile preprocessFileLineNumbers (externalConfigFolder + "\main_config.sqf");
-}
-else
-{
-	diag_log format["[WARNING] A3W configuration file '%1\main_config.sqf' was not found. Using default settings!", externalConfigFolder];
-	diag_log "[WARNING] For more information go to http://forums.a3wasteland.com/";
+	if (loadFile (externalConfigFolder + "\main_config.sqf") != "") then
+	{
+		call compile preprocessFileLineNumbers (externalConfigFolder + "\main_config.sqf");
+	}
+	else
+	{
+		diag_log format["[WARNING] A3W configuration file '%1\main_config.sqf' was not found. Using default settings!", externalConfigFolder];
+		diag_log "[WARNING] For more information go to http://forums.a3wasteland.com/";
+	};
 };
 
 if (isServer) then
@@ -142,6 +150,7 @@ if (isServer) then
 		"A3W_teamPlayersMap",
 		"A3W_remoteBombStoreRadius",
 		"A3W_vehiclePurchaseCooldown",
+		"A3W_vehicleRemotePurchaseCooldown",
 		"A3W_disableGlobalVoice",
 		"A3W_antiHackMinRecoil",
 		"A3W_spawnBeaconCooldown",
@@ -159,6 +168,7 @@ if (isServer) then
 		"A3W_uavControl",
 		"A3W_disableUavFeed",
 		"A3W_townSpawnCooldown",
+		"A3W_maxSpawnBeacons",
 		"A3W_survivalSystem",
 		"A3W_extDB_GhostingAdmins",
 		"A3W_extDB_SaveUnlockedObjects",
@@ -179,9 +189,13 @@ if (isServer) then
 		"A3W_artilleryRadius",
 		"A3W_artilleryCooldown",
 		"A3W_artilleryAmmo",
-		"A3W_territoryWarningIcons",
 		"A3W_disableBuiltInThermal",
-		"A3W_headshotNoRevive"
+		"A3W_customDeathMessages",
+		"A3W_headshotNoRevive",
+		"gearLevel"
+
+
+
 	];
 
 	addMissionEventHandler ["PlayerConnected", fn_onPlayerConnected];
@@ -556,4 +570,6 @@ if !(["A3W_hcObjCleanup"] call isConfigOn) then
 {
 	// Start clean-up loop
 	execVM "server\WastelandServClean.sqf";
+
 };
+[] ExecVM "addons\cleanStores\cleanStores.sqf";

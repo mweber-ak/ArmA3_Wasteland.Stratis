@@ -25,7 +25,8 @@ _setupObjects =
 	_box1 = createVehicle ["Box_NATO_Wps_F", _missionPos, [], 0, "None"];
 	_box1 setVariable ["R3F_LOG_disabled", true, true];
 	_box1 setDir random 360;
-	[_box1, "mission_USSpecial"] call fn_refillbox;
+	//[_box1, "mission_USSpecial"] call fn_refillbox;
+	_box1 call randomCrateLoadOut; // new randomCrateLoadOut function call
 
 	_cashObjects = [];
 
@@ -54,7 +55,7 @@ _setupObjects =
 	[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _vehicleClass >> "picture");
-	_missionHintText = format ["A treasure containing <t color='%1'>$25,000</t> and weapons is being recovered.<br/>If you want to capture it, you will need diving gear and an underwater weapon.", moneyMissionColor];
+	_missionHintText = format ["A treasure containing <t color='%1'>$175,000</t> and weapons is being recovered.<br/>If you want to capture it, you will need diving gear and an underwater weapon.", moneyMissionColor];
 };
 
 _waitUntilMarkerPos = nil;
@@ -78,7 +79,7 @@ _successExec =
 
 	// Give the rewards
 	{
-		_x setVariable ["cmoney", 2500, true];
+		_x setVariable ["cmoney", 17500, true];
 		_x setVariable ["owner", "world", true];
 	} forEach _cashObjects;
 

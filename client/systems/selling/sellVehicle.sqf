@@ -25,16 +25,6 @@ storeSellingHandle = _this spawn
 	_type = typeOf _vehicle;
 	_objName = getText (configFile >> "CfgVehicles" >> _type >> "displayName");
 
-	_checkDamage =
-	{
-		if (damage _vehicle > 0.99) then
-		{
-			playSound "FD_CP_Not_Clear_F";
-			[format ['"%1" is too much damaged to be sold.', _objName], "Error"] call  BIS_fnc_guiMessage;
-			false
-		} else { true };
-	};
-
 	_checkValidDistance =
 	{
 		if (_vehicle distance _storeNPC > VEHICLE_MAX_SELLING_DISTANCE) then
@@ -55,7 +45,6 @@ storeSellingHandle = _this spawn
 		} else { true };
 	};
 
-	if (!call _checkDamage) exitWith {};
 	if (!call _checkValidDistance) exitWith {};
 	if (!call _checkValidOwnership) exitWith {};
 

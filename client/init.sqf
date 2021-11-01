@@ -25,6 +25,9 @@ groupManagmentActive = false;
 pvar_PlayerTeamKiller = [];
 doCancelAction = false;
 
+//AJ Beacondetector
+BeaconScanInProgress = false;
+
 //Initialization Variables
 playerCompiledScripts = false;
 playerSetupComplete = false;
@@ -158,9 +161,13 @@ A3W_clientSetupComplete = compileFinal "true";
 
 A3W_scriptThreads pushBack execVM "addons\fpsFix\vehicleManager.sqf";
 A3W_scriptThreads pushBack execVM "addons\Lootspawner\LSclientScan.sqf";
+[] execVM "addons\disableThermal\disablethermal.sqf";
 [] execVM "client\functions\drawPlayerIcons.sqf";
 [] execVM "addons\camera\functions.sqf";
 [] execVM "addons\UAV_Control\functions.sqf";
+[] execVM "addons\water_edge\functions.sqf";
+
+if(hasInterface) then{[] execVM "addons\statusBar\statusBar.sqf"};
 
 call compile preprocessFileLineNumbers "client\functions\generateAtmArray.sqf";
 [] execVM "client\functions\drawPlayerMarkers.sqf";
@@ -169,7 +176,7 @@ inGameUISetEventHandler ["Action", "_this call A3W_fnc_inGameUIActionEvent"];
 
 { [_x] call fn_remotePlayerSetup } forEach allPlayers;
 
-// update player's spawn beaoon
+// update player's spawn beacon
 {
 	if (_x getVariable ["ownerUID",""] == getPlayerUID player) then
 	{
@@ -177,3 +184,24 @@ inGameUISetEventHandler ["Action", "_this call A3W_fnc_inGameUIActionEvent"];
 		_x setVariable ["side", playerSide, true];
 	};
 } forEach pvar_spawn_beacons;
+
+[] execVM "client\functions\globalChatMessages.sqf";
+
+/*/ virtual arsenal --------------------------------------------------------------------------- /*/
+[missionNamespace, "arsenalOpened", {
+	9999 cutText ["", "BLACK IN", 0.01]; // remove the black screen
+	player hideObject false; // unhide player for virtual arsenal viewing purposes (local only, not global).
+    disableSerialization;
+    _display = _this select 0;
+    (_display displayCtrl 44150) ctrlRemoveAllEventHandlers "buttonclick";
+    (_display displayCtrl 44150) ctrlEnable false; // remove random button action.
+	_display displayAddEventHandler ["KeyDown", "if ((_this select 1) in [19,29]) then {true}"];
+	['showMessage',[_display,'VA RESTRICTION: You are only allowed a maximum of 4 held magazines with 1 in gun. Rockets cannot exceed 1 per type in bag, however 1 AT will be in Launcher on spawn, extra equipment and magazines will be removed!']] call BIS_fnc_Arsenal;
+}] call BIS_fnc_addScriptedEventHandler;
+
+[missionNamespace, "arsenalClosed", {
+	9999 cutText ["", "BLACK", 0.01]; // fade to black screen
+	va_var_gearCheckInProgress = nil; // gearCheck.sqf has a waitUntil for VA level 15... and only exits once VA has CLOSED so the respawn screen doesn't show whilst in VA! damn bugs!
+    [] call va_fnc_gearRestrict; // restrict the VA load out (mokey)
+}] call BIS_fnc_addScriptedEventHandler;
+/*/ ------------------------------------------------------------------------------------------- /*/

@@ -65,6 +65,7 @@ storePurchaseHandle = _this spawn
 
 	_showInsufficientFundsError =
 	{
+		_itemText = _this select 0;
 		hint parseText format ["Not enough money for<br/>""%1""", _itemText];
 		playSound "FD_CP_Not_Clear_F";
 		_price = -1;
@@ -72,6 +73,7 @@ storePurchaseHandle = _this spawn
 
 	_showItemSpawnTimeoutError =
 	{
+		_itemText = _this select 0;
 		hint parseText format ["<t color='#ffff00'>An unknown error occurred.</t><br/>The purchase of ""%1"" has been cancelled.", _itemText];
 		playSound "FD_CP_Not_Clear_F";
 		_price = -1;
@@ -79,7 +81,8 @@ storePurchaseHandle = _this spawn
 
 	_showItemSpawnedOutsideMessage =
 	{
-		hint format ["""%1"" has been spawned outside, in front of the store.%2", _itemText, ["","\n\nVehicle saving will not start until manually enabled."] select ((objectFromNetId _object) getVariable ["A3W_skipAutoSave", false])];
+		_itemText = _this select 0;
+		hint format ["""%1"" has been spawned outside, in front of the store.", _itemText];
 		playSound "FD_Finish_F";
 	};
 
@@ -161,17 +164,32 @@ storePurchaseHandle = _this spawn
 		};
 	};
 
-	if (!isNil "_price" && {_price > -1}) then // vehicle price now handled in spawnStoreObject.sqf
+	if (!isNil "_price" && {_price > -1}) then
 	{
-		vehicleStore_lastPurchaseTime = diag_tickTime;
+		_playerMoney = player getVariable ["cmoney", 0];
 
-		//player setVariable ["cmoney", _playerMoney - _price, true];
-		//[player, -_price] call A3W_fnc_setCMoney;
-		_playerMoneyText ctrlSetText format ["Cash: $%1", [player getVariable ["cmoney", 0]] call fn_numbersText];
-
-		if (["A3W_playerSaving"] call isConfigOn) then
+		// Re-check for money after purchase
+		if (_price > _playerMoney) then
 		{
-			[] spawn fn_savePlayerData;
+			if (!isNil "_requestKey" && {!isNil _requestKey}) then
+			{
+				deleteVehicle objectFromNetId (missionNamespace getVariable _requestKey);
+			};
+
+			[_itemText] call _showInsufficientFundsError;
+		}
+		else
+		{
+			vehicleStore_lastPurchaseTime = diag_tickTime;
+
+			//player setVariable ["cmoney", _playerMoney - _price, true];
+			[player, -_price] call A3W_fnc_setCMoney;
+			_playerMoneyText ctrlSetText format ["Cash: $%1", [player getVariable ["cmoney", 0]] call fn_numbersText];
+
+			if (["A3W_playerSaving"] call isConfigOn) then
+			{
+				[] spawn fn_savePlayerData;
+			};
 		};
 	};
 

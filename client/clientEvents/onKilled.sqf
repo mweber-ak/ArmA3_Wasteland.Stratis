@@ -58,7 +58,6 @@ if (_player == player) then
 	(findDisplay 2001) closeDisplay 0; // Close Gunstore
 	(findDisplay 2009) closeDisplay 0; // Close Genstore
 	(findDisplay 5285) closeDisplay 0; // Close Vehstore
-	(findDisplay 5785) closeDisplay 0; // Close Paintshop
 	(findDisplay 63211) closeDisplay 0; // Close ATM
 	uiNamespace setVariable ["BIS_fnc_guiMessage_status", false]; // close message boxes
 	closeDialog 0;
@@ -125,4 +124,34 @@ if (_player == player && playerSide in [BLUFOR,OPFOR] && player != _killer && ve
 			pvar_PlayerTeamKiller = [_killer, _killerUID, _killerName];
 		};
 	};
+};
+
+// soulkobk - hacky work-around for buggy goggles/balaclava due to profile bug (face wearable).
+_unitGoggles = (goggles _player);
+_unitHeadGear = (headGear _player);
+_unitHMD = (hmd _player);
+
+waitUntil {(((vectorMagnitude velocity _player * 3.6) isEqualTo 0) && (isTouchingGround _player))};
+
+_headGearHolder = createVehicle ["weaponHolderSimulated", (getPosATL vehicle _player), [], 2, "CAN_COLLIDE"];
+_headGearHolder setDir random 360;
+_headGearHolder setVariable ["processedDeath", diag_tickTime];
+
+if (_unitGoggles != "") then
+{
+	removeGoggles _player;
+	_headGearHolder addItemCargoGlobal [_unitGoggles,1];
+};
+
+if (_unitHeadGear != "") then
+{
+	removeHeadgear _player;
+	_headGearHolder addItemCargoGlobal [_unitHeadGear,1];
+};
+
+if (_unitHMD != "") then
+{
+	_player unassignItem _unitHMD;
+	_player removeItem _unitHMD;
+	_headGearHolder addItemCargoGlobal [_unitHMD,1];
 };

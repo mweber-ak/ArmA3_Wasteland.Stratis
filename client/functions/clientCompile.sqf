@@ -64,6 +64,7 @@ unitHandleDamage = "client\functions\unitHandleDamage.sqf" call mf_compile;
 updateTerritoryMarkers = "territory\client\updateTerritoryMarkers.sqf" call mf_compile;
 vehicleSideCfg = "client\functions\vehicleSideCfg.sqf" call mf_compile;
 weaponDisassembledEvent = "client\functions\weaponDisassembledEvent.sqf" call mf_compile;
+deleteBeacon = "client\items\beacon\deleteBeacon.sqf" call mf_compile;
 
 // Player details and actions
 loadPlayerMenu = "client\systems\playerMenu\init.sqf" call mf_compile;
@@ -91,6 +92,7 @@ teamkillAction = "client\functions\doTeamKillAction.sqf" call mf_compile;
 teamkillMessage = "client\functions\showTeamKillMessage.sqf" call mf_compile;
 
 // Dialog compiles
+loadTOParmaInfo = "addons\TOParmaInfo\loadTOParmaInfo.sqf" call mf_compile;
 client_respawnDialog = "client\systems\playerMenu\dialog\loadRespawnDialog.sqf" call mf_compile;
 fn_checkStoreItemDLC = "client\functions\fn_checkStoreItemDLC.sqf" call mf_compile;
 fn_respawnTimer = "client\systems\scoreboard\fn_respawnTimer.sqf" call mf_compile;
@@ -106,10 +108,32 @@ getSellPriceList = "client\systems\selling\getSellPriceList.sqf" call mf_compile
 populateGeneralStore = "client\systems\generalStore\populateGenStore.sqf" call mf_compile;
 populateGunStore = "client\systems\gunStore\populateGunStore.sqf" call mf_compile;
 populateVehicleStore = "client\systems\vehicleStore\populateVehicleStore.sqf" call mf_compile;
-repaintVehicle = "client\systems\vehicleStore\repaintVehicle.sqf" call mf_compile;
 requestStoreObject = "client\functions\requestStoreObject.sqf" call mf_compile;
 vehicleInfo = "client\systems\vehicleStore\vehicleInfo.sqf" call mf_compile;
 weaponInfo = "client\systems\gunStore\weaponInfo.sqf" call mf_compile;
+carpetBomb = "addons\carpetBomb\GOM_fnc_carpetBombing.sqf" call mf_compile;
+
+/*/ ------------------------------------------------------------------------------------------- /*/
+va_fnc_gearCheck = "addons\gear\gearCheck.sqf" call mf_compile;
+va_fnc_gearLevel01 = "addons\gear\gearLevel1.sqf" call mf_compile;
+va_fnc_gearLevel02 = "addons\gear\gearLevel2.sqf" call mf_compile;
+va_fnc_gearLevel03 = "addons\gear\gearLevel3.sqf" call mf_compile;
+va_fnc_gearLevel04 = "addons\gear\gearLevel4.sqf" call mf_compile;
+va_fnc_gearLevel05 = "addons\gear\gearLevel5.sqf" call mf_compile;
+va_fnc_gearLevel06 = "addons\gear\gearLevel6.sqf" call mf_compile;
+va_fnc_gearLevel07 = "addons\gear\gearLevel7.sqf" call mf_compile;
+va_fnc_gearLevel08 = "addons\gear\gearLevel8.sqf" call mf_compile;
+va_fnc_gearLevel09 = "addons\gear\gearLevel9.sqf" call mf_compile;
+va_fnc_gearLevel10 = "addons\gear\gearLevel10.sqf" call mf_compile;
+va_fnc_gearLevel11 = "addons\gear\gearLevel11.sqf" call mf_compile;
+va_fnc_gearLevel12 = "addons\gear\gearLevel12.sqf" call mf_compile;
+va_fnc_gearLevel13 = "addons\gear\gearLevel13.sqf" call mf_compile;
+va_fnc_gearLevel14 = "addons\gear\gearLevel14.sqf" call mf_compile;
+va_fnc_gearLevel15 = "addons\gear\gearLevel15.sqf" call mf_compile;
+va_fnc_gearLevel16 = "addons\gear\gearLevel16.sqf" call mf_compile;
+va_fnc_gearRestrict = "addons\gear\gearRestrict.sqf" call mf_compile;
+
+/*/ ------------------------------------------------------------------------------------------- /*/
 
 if (isNil "A3W_fnc_MP") then { A3W_fnc_MP = compile preprocessFileLineNumbers "\A3\functions_f\MP\fn_MP.sqf" };
 if (isNil "A3W_fnc_MPexec") then { A3W_fnc_MPexec = compile preprocessFileLineNumbers "\A3\functions_f\MP\fn_MPexec.sqf" };

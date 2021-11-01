@@ -18,9 +18,7 @@ _obj = _this;
 if (isNull _obj) exitWith { [] };
 
 _sellValue = 0;
-//_objItems = [];
 
-/*
 _objItems = (getItemCargo _obj) call cargoToPairs;
 
 _objMags = [];
@@ -35,14 +33,11 @@ _objWeapons = [];
 	{ [_objItems, _x, 1] call fn_addToPairs } forEach (_weaponArray select 1);
 	{ [_objMags, _x select 0, [_x select 1]] call fn_addToPairs } forEach (_weaponArray select 2);
 } forEach weaponsItemsCargo _obj;
-*/
 
 // Add stuff contained in uniforms, vest, and backpacks inside the object to the main arrays
-/*private _scanContainer =
 {
-	private "_x";
-	if (isNil "_x") then { _x = _this };
-	_x params ["_class", "_container"];
+	_class = _x select 0;
+	_container = _x select 1;
 
 	// only add backpacks, since uniforms and vests already in _objItems via getItemCargo
 	if (_class isKindOf "Bag_Base") then
@@ -50,16 +45,9 @@ _objWeapons = [];
 		[_objItems, _class, 1] call fn_addToPairs;
 	};
 
-	if (_objItems isEqualTo []) then 
 	{
-		_objItems = (getItemCargo _container) call cargoToPairs;
-	}
-	else
-	{
-		{
-			[_objItems, _x select 0, _x select 1] call fn_addToPairs;
-		} forEach ((getItemCargo _container) call cargoToPairs);
-	};
+		[_objItems, _x select 0, _x select 1] call fn_addToPairs;
+	} forEach ((getItemCargo _container) call cargoToPairs);
 
 	{
 		[_objMags, _x select 0, [_x select 1]] call fn_addToPairs;
@@ -71,13 +59,7 @@ _objWeapons = [];
 		{ [_objItems, _x, 1] call fn_addToPairs } forEach (_weaponArray select 1);
 		{ [_objMags, _x select 0, [_x select 1]] call fn_addToPairs } forEach (_weaponArray select 2);
 	} forEach weaponsItemsCargo _container;
-
-	_scanContainer forEach everyContainer _obj;
-};
-
-["", _obj] call _scanContainer;*/
-
-(_obj call fn_containerCargoToPairs) params ["_objWeapons", "_objMags", "_objItems", "_objBackpacks"];
+} forEach everyContainer _obj;
 
 _allStoreMagazines = call allStoreMagazines;
 _allGunStoreFirearms = call allGunStoreFirearms + call genItemArray;
@@ -136,19 +118,26 @@ _allStoreItems = call allRegularStoreItems + call allStoreGear;
 
 // Combine all items in new array
 _allObjItems = [];
-_allObjItems append _objWeapons;
-_allObjItems append _objMags;
-_allObjItems append _objItems;
-_allObjItems append _objBackpacks;
+{ _allObjItems pushBack _x } forEach _objWeapons;
+{ _allObjItems pushBack _x } forEach _objMags;
+{ _allObjItems pushBack _x } forEach _objItems;
 
 // Add value of each item to sell value, and acquire item display name
 {
 	_item = _x;
-	_item params ["_itemClass", "_itemQty", ["_magsAmmo",[]]];
+	_itemClass = _x select 0;
+	_itemQty = _x select 1;
+	_itemQtyArr = nil;
 	_itemValue = 10;
 	_sellValue = 0;
 
-	if (_itemQty > 0 || count _magsAmmo > 0) then
+	if (typeName _itemQty == "ARRAY") then
+	{
+		_itemQtyArr = _itemQty;
+		_itemQty = count _itemQty;
+	};
+
+	if (_itemQty > 0) then
 	{
 		_cfgCategory = switch (true) do
 		{
@@ -169,13 +158,12 @@ _allObjItems append _objBackpacks;
 				};
 			} forEach _allStoreMagazines;
 
-			_sellValue = _sellValue + GET_HALF_PRICE(_itemValue * _itemQty); // full mags
-
 			{
-				_sellValue = _sellValue + GET_HALF_PRICE(_itemValue * (_x / _magFullAmmo)); // partial mags
-			} forEach _magsAmmo;
+				_magValue = GET_HALF_PRICE(_itemValue * (_x / _magFullAmmo)); // Get selling price relative to ammo count
+				_sellValue = _sellValue + _magValue;
+			} forEach _itemQtyArr;
 
-			_item set [1, _itemQty + count _magsAmmo]; // readjust total count before displaying to user
+			_item set [1, _itemQty];
 		}
 		else
 		{

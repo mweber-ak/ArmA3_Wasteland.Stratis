@@ -91,13 +91,13 @@ _resupplyThread = [_vehicle, _unit] spawn
 				_abortText = "The vehicle has been destroyed.";
 			};
 
-			// Abort if no resupply vehicle in proximity
+			/*// Abort if no resupply vehicle in proximity
 			_checkCondition = {{alive _x && {_x getVariable ["A3W_resupplyTruck", false]}} count (_vehicle nearEntities ["AllVehicles", RESUPPLY_TRUCK_DISTANCE]) == 0};
 			if (call _checkCondition) exitWith
 			{
 				_pauseText = "Move closer to a resupply vehicle.";
 				_abortText = "Too far from resupply vehicle.";
-			};
+			};*/
 
 			// Abort if player gets out of vehicle
 			_checkCondition = {vehicle _unit != _vehicle};
@@ -216,7 +216,7 @@ _resupplyThread = [_vehicle, _unit] spawn
 		{
 			_x params ["_mag", "_path", "_ammo"];
 
-			if (_mag != "FakeWeapon" && !isText (configFile >> "CfgMagazines" >> _mag >> "pylonWeapon")) then
+			if (_mag != "FakeWeapon" && _mag select [0,5] != "Pylon") then
 			{
 				_pathArr = [_pathArrs, _path] call fn_getFromPairs;
 				_new = isNil "_pathArr";

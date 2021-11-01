@@ -8,9 +8,9 @@
 
 if (!hasInterface) exitWith {};
 
-#define ICON_fadeDistance 1250
-#define ICON_limitDistance 2000
-#define ICON_sizeScale 0.75
+#define ICON_fadeDistance 1750
+#define ICON_limitDistance 2500
+#define ICON_sizeScale 0.8
 
 #define MINE_ICON_MAX_DISTANCE 200 // 200 is Arma 3 default for mine detector
 
@@ -217,7 +217,7 @@ drawPlayerIcons_thread = [] spawn
 
 					if (_thermalActive && {cameraOn == vehicle player && _weapon in weapons player && _ownWeapon &&
 						({_x == "TI"} count getArray (configFile >> "CfgWeapons" >> _weapon >> "visionMode") > 0 ||
-						 {!(configProperties [configFile >> "CfgWeapons" >> _weapon >> "OpticsModes", "isClass _x && {{_x == 'TI'} count getArray (_x >> 'visionMode') > 0}"] isEqualTo [])})}) then
+						 {!("{_x == 'TI'} count getArray (_x >> 'visionMode') > 0" configClasses (configFile >> "CfgWeapons" >> _weapon >> "OpticsModes") isEqualTo [])})}) then
 					{
 						if (isNil "A3W_builtInThermalOffline") then
 						{

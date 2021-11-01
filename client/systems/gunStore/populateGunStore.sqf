@@ -21,9 +21,6 @@ _ammoBtn = _dialog displayCtrl gunshop_but_butammo;
 _ammoLbl = _dialog displayCtrl gunshop_ammo_TEXT;
 _gunDesc = _dialog displayCtrl gunshop_gun_desc;
 
-_wepFilterText = _dialog displayCtrl gunshop_WeaponFilterText_IDC;
-_wepFilterDropdown = _dialog displayCtrl gunshop_WeaponFilterDropdown_IDC;
-
 _ammoLbl ctrlSetText "";
 
 lbClear _gunlist;
@@ -31,7 +28,6 @@ lbClear _ammolist;
 _gunlist lbSetCurSel -1;
 
 _showAmmo = false;
-_wepFilter = false;
 
 _playerSideNum = switch (playerSide) do
 {
@@ -75,7 +71,6 @@ switch(_switch) do
 	case 7:
 	{
 		_itemsArray = call accessoriesArray;
-		_wepFilter = true;
 	};
 	case 8:
 	{
@@ -94,44 +89,24 @@ switch(_switch) do
 	};
 };
 
-_ammoBtn ctrlShow _showAmmo;
-_ammoLbl ctrlShow _showAmmo;
-_ammolist ctrlShow _showAmmo;
-
-_wepFilterText ctrlShow _wepFilter;
-_wepFilterDropdown ctrlShow _wepFilter;
-_wepFilterData = "";
-
-if (_wepFilter) then
+if (_showAmmo) then
 {
-	_wepFilterDropdown ctrlRemoveAllEventHandlers "LBSelChanged";
-	_wepFilterSel = lbCurSel _wepFilterDropdown;
-	lbClear _wepFilterDropdown;
-
-	_wepFilterDropdown lbAdd "- all -";
-
-	{
-		if (_x != "") then
-		{
-			_idx = _wepFilterDropdown lbAdd getText (configFile >> "CfgWeapons" >> _x >> "displayName");
-			_wepFilterDropdown lbSetData [_idx, _x];
-		};
-	} forEach (weapons player arrayIntersect (weapons player - [binocular player]));
-
-	_wepFilterDropdown lbSetCurSel ([_wepFilterSel, 0] select (_wepFilterSel == -1));
-	_wepFilterData = _wepFilterDropdown lbData lbCurSel _wepFilterDropdown;
-
-	_wepFilterDropdown ctrlAddEventHandler ["LBSelChanged", { [7] call populateGunStore }];
+	_ammoBtn ctrlShow true;
+	_ammoLbl ctrlShow true;
+	_ammolist ctrlShow true;
+}
+else
+{
+	_ammoBtn ctrlShow false;
+	_ammoLbl ctrlShow false;
+	_ammolist ctrlShow false;
 };
-
-_wepFilterItems = if (_wepFilterData != "") then { [_wepFilterData] call BIS_fnc_compatibleItems } else { [] };
 
 {
 	_weaponClass = _x select 1;
 
 	_parentCfg = switch (true) do
 	{
-		case (_wepFilterData != "" && {{_x == _weaponClass} count _wepFilterItems == 0}): { nil };
 		case ("HIDDEN" in (_x select [3,999])):                        { nil };
 		case (isClass (configFile >> "CfgVehicles" >> _weaponClass)):  { configFile >> "CfgVehicles" };
 		case (isClass (configFile >> "CfgWeapons" >> _weaponClass)):   { configFile >> "CfgWeapons" };

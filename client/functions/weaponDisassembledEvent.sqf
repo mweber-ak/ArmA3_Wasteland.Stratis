@@ -8,13 +8,13 @@ _unit = _this select 0;
 _bag1 = _this select 1;
 _bag2 = _this select 2;
 
-if ([["_UAV_","_Designator_"], typeOf _bag1] call fn_findString != -1) exitWith {};
+if ({_bag1 isKindOf _x} count ["B_UAV_01_backpack_F", "B_Static_Designator_01_weapon_F", "O_Static_Designator_02_weapon_F"] > 0) exitWith {};
 
 _currBag = unitBackpack _unit;
 
 if (_unit == player) then
 {
-	[format ["You are not allowed to disassemble weapons.<br/>Use the ""%1"" option instead.", ["STR_R3F_LOG_action_deplacer_objet", "Move"] call getPublicVar]] spawn BIS_fnc_guiMessage;
+	[format ["You are not allowed to disassemble weapons.<br/>Use the ""%1"" option instead.", ["STR_R3F_LOG_actionMoveObject", "Move"] call getPublicVar]] spawn BIS_fnc_guiMessage;
 };
 
 // Optional hiding of dropped bags

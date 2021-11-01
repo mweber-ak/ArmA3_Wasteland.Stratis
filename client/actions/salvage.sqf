@@ -8,7 +8,7 @@
 
 // Salvaging of vehicle wrecks
 
-#define GET_ONE_TENTH_PRICE(PRICE) ((ceil (((PRICE) / 10) / 5)) * 5)
+#define GET_QUARTER_PRICE(PRICE) ((ceil (((PRICE) / 4) / 5)) * 5)
 
 // Check if mutex lock is active.
 if (mutexScriptInProgress) exitWith
@@ -38,8 +38,8 @@ _checks =
 
 		case (isNull _object): { _text = "The object no longer exists" };
 		case (alive _object || {alive _x} count crew _object > 0): { _text = "Action failed! You are not allowed to salvage this object" };
-		case (!isNull (_object getVariable ["R3F_LOG_est_deplace_par", objNull])): { _text = "Action failed! Somebody moved the object" };
-		case (!isNull (_object getVariable ["R3F_LOG_est_transporte_par", objNull])): { _text = "Action failed! Somebody loaded or towed the object" };
+		case (!isNull (_object getVariable ["R3F_LOG_isMovedBy", objNull])): { _text = "Action failed! Somebody moved the object" };
+		case (!isNull (_object getVariable ["R3F_LOG_isTransportedBy", objNull])): { _text = "Action failed! Somebody loaded or towed the object" };
 		case (doCancelAction): { doCancelAction = false; _text = "Salvaging cancelled" };
 		default
 		{
@@ -115,9 +115,9 @@ if (_variant != "") then { _variant = "variant_" + _variant };
 
 // Final money reward is decided from vehicle store price
 {
-	if (_vehClass == _x select 1 && (_variant == "" || {_variant in _x})) exitWith
+	if (_x select 1 == _vehClass && (_variant == "" || {_variant in _x})) exitWith
 	{
-		_money = GET_ONE_TENTH_PRICE(_x select 2);
+		_money = GET_QUARTER_PRICE(_x select 2);
 	};
 } forEach call allVehStoreVehicles;
 

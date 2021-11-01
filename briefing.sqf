@@ -16,9 +16,21 @@ waitUntil {!isNull player};
 player createDiarySubject ["infos", "Infos and Help"];
 player createDiarySubject ["changelog", "Changelog"];
 player createDiarySubject ["credits", "Credits"];
+player createDiarySubject ["admins", "Admin List"];
+player createDiarySubject ["gearlevel", "Gear Level Info"];
+player createDiarySubject ["Rules", "Rules"];
 
-player createDiaryRecord ["changelog",
+player createDiarySubject["changelog",
 [
+"UXO Logs",
+"
+<br/>--------11/1/2021-------
+<br/>[Start] Reinitialize Project
+"
+]];
+
+player createDiarySubject [
+	[
 "v1.4d",
 "
 <br/>[Added] ADR-97 SMG
@@ -47,6 +59,105 @@ player createDiaryRecord ["changelog",
 <br/>[Fixed] More money exploits
 <br/>[Fixed] Other minor changes and fixes
 "
+]];
+
+player createDiaryRecord ["changelog",
+[
+"Fractured Logs",
+"
+<br/>--------5/24/2018-------
+<br/>[CHANGE] Increased minimal amount of items in randomized crates
+<br/>[CHANGE] Increased rarity of thermal scopes in crates
+<br/>[FIX] Random Crate Loadouts
+<br/>--------5/23/2018-------
+<br/>[ADDED] Vector control of objects
+<br/>[CHANGED] R3F Logistics for future optimizations
+<br/>--------5/19/2018-------
+<br/>[FIX] Remaining Value in Smuggler Missions
+<br/>--------5/18/2018-------
+<br/>[FIXED] Various Bugs
+<br/>[CHANGED] Gear Levels, now are class specific
+<br/>[FIXED] Money Missions displaying 1 value and giving another
+<br/>--------5/16/2018-------
+<br/>[ADDED] New Mission: RED DAWN
+<br/>[ADDED] New Mission: Smuggler Missions: Small, Medium, Large, Heavy
+<br/>[REMOVED] Money Missions
+<br/>[CHANGED] Optimization of Missions
+<br/>--------5/15/2018--------
+<br/>[CHANGED] How Crates Spawn. If Air Mission, Crates Fall from sky with parachute
+<br>If a crate is on the ground it spawns with red smoke and a red chemlight
+<br/>--------5/10/2018--------
+<br/>[CHANGED]Mission Crates, All are 100% randomized now.
+<br/>--------5/10/2018--------
+<br>/[CHANGED] Damaging Values to Gas Grenades
+<br/>[ADDED] Screen Red Effect to Toxic Gas Grenades
+<br/>[OPTIMIZED] Toxic Gas Grenade Scripts
+<br/>[FIXED] Launcher NVGs (The Darker it is, the better they work)
+<br/>--------5/8/2018--------
+<br/>[ADDED] Night Vision to Rocket Launchers
+<br/>--------5/4/2018--------
+<br/>[ADDED] #MakeGenStoresGreatAgain (You can figure out the rest)
+<br/>[CHANGED] GUI for all menus
+<br/>[CLEANED] ` key menu
+<br/>[ADDED] Logo to ` key menu
+<br/>[ADDED] Money Runner Mission
+<br/>--------5/1/2018--------
+<br/>[UPDATE] Full Screen NVG fixes
+<br/>[ADDED] Visual effects while transfering sight from water to air
+<br/>[REMOVED] Broken Mission
+<br/>[ADDED] Tempest Gunstore
+<br/>[ADDED] Full Screen NVG
+<br/>[ADDED] Gear Level To Status Bar (Beside Logo)
+<br/>[ADDED] FG Logo To Status Bar
+<br/>[ADDED] Deposit All Button to ATM
+<br/>--------4/28/2018--------
+<br/>[LIMITED] VA Grenades to 2 (2 per type)
+<br/>[LIMITED] VA Rockets to 3 (1 AT in Rocket 1 HE and 1 AT in Inventory)
+<br/>[LIMITED] VA Mags to 5 (1 in gun 4 in inventory)
+<br/>[LIMITED]VA Spawn Order VA -> Select Spawn
+<br/>[OPTIMIZED] VA Gear Level
+<br/>[LIMITED] Ammo Amount for Gear Levels
+<br/>--------4/10/2018--------
+<br/>[REDUCED] Frequency of Abandoned Vehicle Mission
+<br/>[REMOVED] Vehicles from Abandoned Vehicle Mission
+<br/>[FIX] Start Up Messages
+<br/>[OPTIMIZED] Code and Calls
+<br/>[UPDATE] Mission and Database to current
+<br/>[ADDED] New Vehicles to Disable Thermals
+<br/>[ADDED] New Vehicles to ToxicGas Exemptions
+<br/>[UPDATE] Anti-Hack :)
+<br/>[NEW] Mission - Abandoned Vehicle
+<br/>[ADDED] Server Messages
+<br/>[ADDED] Tanks DLC to stores
+<br/>[FIXED] Store Prices
+<br/>[FIXED] Disable Thermals
+<br/>][REDUCED] HVT Map Refresh Time to 5 seconds
+<br/>][REMOVED] Bounty System by Centrifugal
+<br/>[FIXED] Optimizations for Server
+<br/>[NEW VERSION] Server Updated and re-released as 2.0
+<br/>[Update] Mission updated.
+<br/>[Update] Anti-hack Updated.
+"
+]];
+
+
+player createDiaryRecord ["changelog",
+[
+        "v1.4c",
+        "
+        <br/>[Added] Tanks DLC
+        <br/>[Added] 3rd column in vehicle store for parts
+        <br/>[Added] AA jet variants
+        <br/>[Added] HE cannons to gun-only jets
+        <br/>[Added] Smoke launchers to tank driver and gunner seats
+        <br/>[Changed] All hidden vehicle paintjobs now available
+        <br/>[Changed] Improved crate and supply truck loot
+        <br/>[Changed] Some store prices
+        <br/>[Fixed] Mortar resupply bugs
+        <br/>[Fixed] Selling of laser designators
+        <br/>[Fixed] More money exploits
+        <br/>[Fixed] Other minor changes and fixes
+        "
 ]];
 
 player createDiaryRecord ["changelog",
@@ -90,23 +201,6 @@ player createDiaryRecord ["changelog",
 <br/>[Changed] Improved antihack
 <br/>[Fixed] Prone reload freeze
 <br/>[Fixed] Many minor changes and fixes
-"
-]];
-
-player createDiaryRecord ["changelog",
-[
-"v1.3c",
-"
-<br/>[Added] Jets DLC
-<br/>[Added] Aircraft carrier on Stratis
-<br/>[Added] Resupply trucks on Altis and Stratis
-<br/>[Added] Driver assist
-<br/>[Changed] Aircraft prices
-<br/>[Changed] Blocked explosives near parking and storage
-<br/>[Changed] Migrated saving system from extDB2 to extDB3
-<br/>[Fixed] Fast revive exploits
-<br/>[Fixed] Could perform your duty after being revived
-<br/>[Fixed] Other minor changes and fixes
 "
 ]];
 
@@ -171,323 +265,6 @@ player createDiaryRecord ["changelog",
 <br/>[Fixed] Various minor bugfixes and optimizations
 "
 ]];
-
-player createDiaryRecord ["changelog",
-[
-"v1.2b",
-"
-<br/>[Added] Scoreboard scrolling via mousewheel
-<br/>[Added] New paintjobs for Kajman, Strider, Gorgon, Hatchback
-<br/>[Changed] Hostile Heli (single) crates now spawn on touchdown
-<br/>[Changed] Lowered Ifrit center of mass to reduce rollovers
-<br/>[Changed] Updated antihack database
-<br/>[Fixed] Saved grenades not throwable on rejoin
-<br/>[Fixed] Corpses not ejecting from vehicle wrecks
-<br/>[Fixed] Items not dropping from vehicle wreck corpses
-<br/>[Fixed] Revive not triggering properly on fatal shot
-<br/>[Fixed] Vehicle turret ammo saving issues
-<br/>[Fixed] Too low damage resistance during revive mode
-<br/>[Fixed] UGVs not airliftable via R3F
-<br/>[Fixed] Revive broken after getting run over by vehicles
-<br/>[Fixed] Veh respawn not being delayed when owner is within 1km
-<br/>[Fixed] All armor values showing 0 in general store
-<br/>[Fixed] Supplies category in general store sometimes empty
-<br/>[Fixed] Server rules not showing anymore in map menu
-<br/>[Fixed] Territory info overlapping with vehicle HUD
-<br/>[Fixed] Vehicle contents selling money exploit
-<br/>[Fixed] Antihack kicks not always working properly
-<br/>[Fixed] Various minor bugfixes and optimizations
-"
-]];
-
-player createDiaryRecord ["changelog",
-[
-"v1.2",
-"
-<br/>[Added] Mag Repack by Outlawled (Ctrl + " + NKEYNAME(19) + ")
-<br/>[Added] Adjustable NV by xx-LSD-xx (Shift + PageUp/Down)
-<br/>[Added] New vehicle store paintjobs
-<br/>[Added] Town spawn cooldown
-<br/>[Added] Ghosting timer
-<br/>[Added] Object lock restriction near stores and missions
-<br/>[Added] Headless client object saving
-<br/>[Added] Time and weather saving
-<br/>[Changed] Expanded UAV control restriction to quadcopters
-<br/>[Changed] Injured players no longer count as town enemies
-<br/>[Changed] Upgraded extDB to extDB2 by Torndeco
-<br/>[Changed] Updated antihack
-<br/>[Fixed] Old spawn beacons no longer shown on spawn menu
-<br/>[Fixed] Multiple money duping exploits
-<br/>[Fixed] Vehicles and objects sometimes disappearing from DB
-<br/>[Fixed] Severe injuries caused by jumping over small ledges
-<br/>[Fixed] Antihack kicks due to RHS, MCC, AGM, ACE3, ALiVE
-<br/>[Fixed] Various minor bugfixes and optimizations
-"
-]];
-
-player createDiaryRecord ["changelog",
-[
-"v1.1b",
-"
-<br/>[Added] Marksmen DLC content
-<br/>[Added] Prevent usage of commander camera
-<br/>[Added] Emergency eject hotkey (Ctrl + " + AKEYNAME("GetOut") + ")
-<br/>[Added] Restricted UAV connection to owner's group
-<br/>[Changed] Improved purchased vehicle setup time
-<br/>[Changed] Admins can now use global voice chat
-<br/>[Changed] Updated antihack
-<br/>[Fixed] Corpses not being ejected from vehicles
-<br/>[Fixed] Thermal imaging not working for UAVs
-<br/>[Fixed] Various minor bugfixes and optimizations
-"
-]];
-
-player createDiaryRecord ["changelog",
-[
-"v1.1",
-"
-<br/>[Added] ATMs
-<br/>[Added] Union Jack vehicle color
-<br/>[Added] Skins hidden in gamefiles for MH-9, Mohawk, and Taru
-<br/>[Added] Improved admin spectate camera by micovery
-<br/>[Added] Earplugs (End key)
-<br/>[Changed] Full rewrite of vehicle respawning system
-<br/>[Fixed] Player moved to position too early during save restore
-<br/>[Fixed] Mission timeout not extending on AI kill
-<br/>[Fixed] Admin teamkill unlocking
-<br/>[Fixed] Improved FPS fix
-<br/>[Fixed] Running animation parachute glitch
-<br/>[Fixed] Various other minor bugfixes and optimizations
-"
-]];
-
-player createDiaryRecord ["changelog",
-[
-"v1.0c",
-"
-<br/>[Added] MySQL support via extDB extension
-<br/>[Added] Town Invasion mission
-<br/>[Added] Chain-reaction player kill tracking
-<br/>[Added] Force Save action for purchased and captured vehicles
-<br/>[Added] Autokick players previously detected by antihack
-<br/>[Added] Entity caching script for headless client
-<br/>[Added] Tron suits to general store
-<br/>[Added] Red lines on map for AIs wandering away from missions
-<br/>[Changed] Mission timeout gets extended on AI kill
-<br/>[Changed] Transport Heli mission Taru variant to Bench
-<br/>[Changed] Spawn beacon item drop to sleeping bag
-<br/>[Fixed] More money exploits
-<br/>[Fixed] Scoreboard ordering
-<br/>[Fixed] Vehicle repair and refuel sometimes not working
-<br/>[Fixed] Injured players' corpses being deleted on disconnect
-<br/>[Fixed] Static weapon disassembly prevention
-<br/>[Fixed] Excess bought rockets ending up in uniform or vest
-<br/>[Fixed] Various other minor bugfixes and optimizations
-"
-]];
-
-player createDiaryRecord ["changelog",
-[
-"v1.0b",
-"
-<br/>[Added] Helicopters DLC content
-<br/>[Added] Revamped respawn menu
-<br/>[Added] 250m altitude limit for territory capture
-<br/>[Added] HALO insertion on spawn beacons
-<br/>[Added] New vehicle store textures
-<br/>[Changed] Increased damage done to planes by 50%
-<br/>[Changed] Plane engines shutdown when above 90% damage
-<br/>[Changed] Player names can also be toggled with Home key
-<br/>[Changed] Increased ATGM UAV price
-<br/>[Changed] Increased prices from thermal scopes again
-<br/>[Changed] Minor edits to spawn loadouts
-<br/>[Fixed] FPS drop that began in v0.9h
-<br/>[Fixed] Saved UAVs not being connectable
-<br/>[Fixed] Indies unable to get in UGVs
-<br/>[Fixed] Blinking fog
-<br/>[Fixed] Clipped numbers on scoreboard
-<br/>[Fixed] Minor other optimizations and fixes
-"
-]];
-
-player createDiaryRecord ["changelog",
-[
-"v1.0",
-"
-<br/>[Added] Custom scoreboard
-<br/>[Added] Mission and store vehicle saving
-<br/>[Added] Player markers on GPS and UAV Terminal
-<br/>[Added] Holster actions
-<br/>[Changed] Full rewrite of side mission system
-<br/>[Changed] Windows key toggles player marker names too
-<br/>[Changed] New loading picture by Gameaholic.se
-<br/>[Fixed] Weapon sometimes disppearing when moving objects
-<br/>[Fixed] More money duping exploits
-<br/>[Fixed] Store menu sizes on smaller aspect ratios
-<br/>[Fixed] Hunger and thirst reset on rejoin
-<br/>[Fixed] Other minor optimizations and fixes
-"
-]];
-
-player createDiaryRecord ["changelog",
-[
-"v0.9h",
-"
-<br/>[Added] Custom revive system based on Farooq's Revive
-<br/>[Added] Territory payroll at regular intervals
-<br/>[Added] Emergency eject and free parachutes (jump key)
-<br/>[Added] Player names toggled with Windows key
-<br/>[Added] Increased missile damage against tanks and helis
-<br/>[Added] Ability to stash money in weapon crates
-<br/>[Added] Ability to sell vehicle inventory at stores
-<br/>[Added] More money shipment mission variants
-<br/>[Added] Reduced wheel damage from collisions
-<br/>[Added] Wreck salvaging
-<br/>[Added] Selling bin in stores
-<br/>[Added] Karts DLC content in stores
-<br/>[Added] Camo sniper rifles in gunstore
-<br/>[Added] Repair Offroad in vehicle store
-<br/>[Added] Team players on map as server option
-<br/>[Added] Unlimited stamina server option
-<br/>[Added] Static weapon saving server option
-<br/>[Added] More push vehicle actions
-<br/>[Added] Paradrop option for airlifted vehicles
-<br/>[Added] Preload checkbox on respawn menu
-<br/>[Added] Remote explosives store distance restriction
-<br/>[Added] Server time multipliers for day and night
-<br/>[Added] Addon-less profileNamespace server persistence
-<br/>[Added] Linux server compatibility
-<br/>[Added] Basic support for headless client
-<br/>[Changed] Independent territory capture is now group-based
-<br/>[Changed] Towns blocked if more enemies than friendlies
-<br/>[Changed] Increased ammo/fuel/repair cargo for resupply trucks
-<br/>[Changed] Increased territory capture rewards for Altis
-<br/>[Changed] Increased money mission rewards
-<br/>[Changed] Weapon loot in buildings now disabled by default
-<br/>[Changed] Mission crates loot was made more random
-<br/>[Changed] Thermal imaging is now available on UAVs
-<br/>[Changed] Increased vehicle store prices
-<br/>[Changed] Increased prices for thermal optics
-<br/>[Changed] Increased player icons up to 2000m
-<br/>[Changed] Improved antihack
-<br/>[Changed] Improved FPS
-<br/>[Fixed] Vehicle store purchase errors due to server lag
-<br/>[Fixed] Corpse created when leaving with player saving
-<br/>[Fixed] Custom vehicle damage handling not working
-<br/>[Fixed] Indie-indie spawn beacon stealing
-<br/>[Fixed] Repair kit and jerrycan distance limit
-<br/>[Fixed] Spawn beacon packing and stealing restrictions
-<br/>[Fixed] Not able to lock static weapons
-<br/>[Fixed] Unbreakable store windows
-<br/>[Fixed] Stratis airbase gunstore desk glitches
-<br/>[Fixed] Missions sometimes completing instantaneously
-<br/>[Fixed] Object ammo/fuel/repair cargo not saving
-<br/>[Fixed] Respawn menu aspect ratio on some resolutions
-<br/>[Fixed] Minor bugs with group system
-<br/>[Fixed] Minor bugs with player items
-<br/>[Fixed] Various other minor bugfixes and optimizations
-"
-]];
-
-player createDiaryRecord ["changelog",
-[
-"v0.9g",
-"
-<br/>[Added] - Vehicle stores
-<br/>[Added] - New lootspawner by Na_Palm, stuff in ALL buildings
-<br/>[Added] - New jets and truck added in A3 v1.14
-<br/>[Added] - New AAF vehicles added in A3 v1.08
-<br/>[Added] - New camos for Mk20 and MX in gunstores
-<br/>[Added] - Ability to push plane backwards
-<br/>[Added] - Ability to sell quadbike contents like crates
-<br/>[Added] - Abort delay during combat when player saving on
-<br/>[Changed] - Improved respawn menu
-<br/>[Changed] - Respawn now longer to preload destination
-<br/>[Changed] - Optimized player icons
-<br/>[Changed] - Optimized FPS fix
-<br/>[Changed] - Improved server persistence (requires iniDBI v1.4+)
-<br/>[Changed] - Improved player saving (server-specific)
-<br/>[Changed] - Improved base saving (server-specific)
-<br/>[Changed] - Reduced starting gear
-<br/>[Changed] - Modified some store prices
-<br/>[Changed] - Reduced initial fuel in cars and helis
-<br/>[Changed] - Removed Buzzard jet from too short runways
-<br/>[Changed] - Removed Kavala castle territory for use as base
-<br/>[Changed] - Increased vehicle repair time to 20 sec.
-<br/>[Changed] - Increased owner unlocking time to 10 sec.
-<br/>[Changed] - Toggling spawn beacon perms is now instant
-<br/>[Changed] - Improved Take option for player items
-<br/>[Changed] - Added option to cancel towing selection
-<br/>[Changed] - Added machine gunner to main mission NPCs
-<br/>[Changed] - Added grenadier to side mission NPCs
-<br/>[Fixed] - Error messages in various menus
-<br/>[Fixed] - Crash when toggling spawn beacon perms
-<br/>[Fixed] - Error when hacking warchests
-<br/>[Fixed] - Vehicle towing and lifting positions
-<br/>[Fixed] - Repair Vehicle option showing for brand new vehicles
-<br/>[Fixed] - Vest purchase price
-<br/>[Fixed] - Vest and helmet armor value
-<br/>[Fixed] - NPC leader now has launcher ammo
-"
-]];
-
-player createDiaryRecord ["changelog",
-[
-"v0.9f",
-"
-<br/>[Added] - Money missions
-<br/>[Added] - Sell Crate Items option at stores when moving crate
-<br/>[Changed] - Reorganized loots for crates and trucks
-<br/>[Fixed] - Broken Warchest menu
-<br/>[Fixed] - Spawn beacons not working for Independent groups
-<br/>[Fixed] - Player icons position inside buildings
-<br/>[Fixed] - MRAPs and quadbikes not spawning
-<br/>[Fixed] - Broken money rewards for territories
-"
-]];
-
-player createDiaryRecord ["changelog",
-[
-"v0.9e",
-"
-<br/>[Added] - Territory system
-<br/>[Added] - Jumping option (step over while running)
-<br/>[Added] - New weapons from v1.04 update
-<br/>[Changed] - Water and food now use water bottles and baked beans
-<br/>[Fixed] - Store object purchases not operating as intended
-<br/>[Fixed] - Objects purchased from stores not saving properly
-<br/>[Fixed] - Minor server-side memory leak
-"
-]];
-
-player createDiaryRecord ["changelog",
-[
-"v0.9d",
-"
-<br/>[Added] - Store object purchases
-<br/>[Changed] - New UI by KoS
-"
-]];
-
-player createDiaryRecord ["changelog",
-[
-"v0.9c",
-"
-<br/>[Changed] - Instant money pickup and drop
-<br/>[Changed] - Increased plane and heli spawning odds
-<br/>[Fixed] - FPS fix improvements
-<br/>[Fixed] - Vehicles disappearing when untowed or airdropped
-"
-]];
-
-player createDiaryRecord ["changelog",
-[
-"v0.9b",
-"
-<br/>[Initial release] - Welcome to Altis!
-"
-]];
-
 
 player createDiaryRecord ["credits",
 [
@@ -630,7 +407,7 @@ player createDiaryRecord ["infos",
 <br/>A. See the above description
 <br/>
 <br/>Q. Where can I get a gun?
-<br/>A. Weapons are found in one of three places, first in ammo crates that come as rewards from missions, inside and outside buildings, and second, in the gear section of the vehicles, which also randomly spawn around the map. The last place to find a gun would be at the gunshops located throughout the map. You can also find them on dead players whose bodies have not yet been looted.
+<br/>A. Weapons are found in one of three places, first in ammo crates that come as rewards from missions, , and second, in the gear section of the vehicles, which also randomly spawn around the map. The last place to find a gun would be at the gunshops located throughout the map. You can also find them on dead players whose bodies have not yet been looted.
 <br/>
 <br/>Q. What are the blue circles on the map?
 <br/>A. The circles represent town limits. If friendly soldiers are in a town, you can spawn there from the re-spawn menu; however if there is an enemy presence, you will not be able to spawn there.
@@ -646,5 +423,135 @@ player createDiaryRecord ["infos",
 <br/>
 <br/>Q. I saw someone breaking a rule, what do I do?
 <br/>A. Simply go into global chat and get the attention of one of the admins or visit our forums, and make a report if the offense is serious.
+"
+]];
+
+player createDiaryRecord ["gearlevel",
+[
+"Gear Levels",
+"
+<br/> When you have enough $ for A gear level, Go and apply here http://UXO-gaming.com/application-forms.php?appid=4
+<br/> When your application is recieved your gear level will be changed within 48 hours.
+<br/> Your Money will then be deducted from your account.
+<br/> To revieve a gear level, Fill out a gear level application on the forums to upgrade your gear level.
+<br/> There are 10 Levels in total.
+<br/> There are 5 Prestiege Levels. (after the 1st 10 levels)
+<br/> Prestiege Gear Levels allow you to spawn with either nothing or the bare minimum.
+<br/> Prestiege Gear Levels are $10,000,000 per level and Prestiege level 5 is $25,000,000
+<br/> Prestiege Gear Levels are for the hardcore wasteland players with a big payoff at the end.
+<br/> The Final Prestiege level allows you to pick weapons from the VR before spawning.
+"
+]];
+
+player createDiaryRecord ["gearlevel",
+[
+"Gear Level information",
+"
+<br/><font size='16'>Gear Levels Have Changed</font>
+<br/><font size='15'>See Site for more info</font>
+<br/><font size='15'>https://www.UXO-gaming.com</font>
+"
+]];
+
+player createDiaryRecord ["admins",
+[
+"Admin List",
+"
+<br/><font color='#00FFEF' size='18'>Super Admins</font>
+<br/><font color='#00FFEF' size='12'>All Functions Activated (No Player Markers or Invisiblilty)</font>
+<br/> * Mokey
+<br/> * Ghostyy
+<br/> * OutlawII
+<br/> * Shine_Dwarf
+<br/> * StinkySneeze (Third Best Canadian/Third Best Sniper)
+<br/> * Donkey
+
+<br/><font color='#0066FF' size='18'>High Admins</font>
+<br/><font color='#00FFEF' size='12'>Teleport, Spectate, Slay Delete Hacked objects</font>
+<br/> * Praetorian
+<br/> * Reaper
+<br/> * Sage
+<br/> * TempestOfChaos
+
+<br/><font color='#002FFF' size='18'>Low Admins</font>
+<br/><font color='#00FFEF' size='12'>Spectate, Slay, Delete Hacked Objects</font>
+<br/> * Caveman
+
+"
+]];
+
+player createDiaryRecord ["Rules",
+[
+"Discord Rules & Info",
+"
+<br/> * (These are rules that apply to UXO Gaming's Discord Server) Failure to follow these rules will result in a kick/ban with or without warning.
+<br/>
+<br/> * No Channel Spamming, do not join different channels in a short period of time. A lot of people run dual monitors and spamming channels will catch their eye. Causing issues with gameplay. This is also annoying for people in the channels.
+<br/> * DO NOT Spam message anyone or any channel.
+<br/> * If you use voice activation or continuous transmission and you have a lot of background noise you will be asked to fix it. If it is not fixed YOU WILL be put on forced PTT (push to talk). Admins will apply or remove this at their own discretion.
+<br/> * No music transmission, unless used in conversation. We use Discord to communicate, *not listen to your music.
+<br/> * New Discord users will be granted (Approved Guest) once the rules have been explained to you and verification that you understand the rules.
+<br/> * Use of the @Everyone command is restricted to FRAC Staff for official announcements only. The @Here may be used in channels sparingly for important topics only. Misuse or spamming of these commands will result in a ban.
+<br/> * Basic etiquette should be used when joining channels including:
+<br/> * - Listening to the channel first to not cut off people
+<br/> * - Refraining from loud introductory noise (i.e. don't join a room yelling (GOOODDDDD MORRNINGGGG!!!!!)
+<br/> * - Giving priority of in-game communications in respective game channels over (chit chat).
+<br/> * - Any channel with a player limit lock is specifically designated for gameplay and anyone joining these channels should take care not to speak over players in game or cause distractions.
+"
+]];
+
+player createDiaryRecord ["Rules",
+[
+"Arma Rules & Info",
+"
+<br/> * (Theses rules apply to the ARMA 3 Stratis Wasteland Server) Failure to follow these rules will result in a kick and or ban, with or without warning.
+<br/>
+<br/> * Keep away from and stay off of Spawn Island located at Grid [037079] North of the map.
+<br/> * STAY OFF of Global VON (Voice Over Network or Voice) , this is activated buy hitting -Caps Lock- (default.) If you are on Global VON hit . (period) to change your channel.
+<br/> * You are allowed to talk in Side VON (Voice Over Network or Voice),  DO NOT Spam side chat in VON. If people say to stop, most likely you are over using side chat and will be considered as spam.
+<br/> * Only English may be used in Global, Side and Direct VON and/or Chats. Other languages may be used in Group VON/chats.
+<br/> * DO NOT advertise or type another community, Clan, or Personal Teamspeak/Discord information in global/side chat. If you are grouped up with another player, you are allowed to type it in group.
+<br/> * If a player is invisible tell him to relog on the server, If he does not we will kill then kick him from the server. (This is a glitch on the server that occasionally happens)
+<br/> * If you are in 1st person mode and you attempt to go into 3rd person mode (Num Pad Enter : Default) and cannot go into 3rd person or do not see your character, log off and reconnect. If this does not fix it ask an admin to slay you, or commit suicide.
+<br/> * Camping stores is allowed. Wasteland is a HARSH survival map. Learn to deal with it and go on your way.
+<br/> * We will not refund any money for any reason UNLESS you have video evidence that a fluke on our server caused you to lose something of value. (flukes) are NOT to include Server Restarts or Server Wipes.
+<br/> * Remember, combat is not a regulated sport. If you die because you think it was unfair (aside from cheating, hacking, or exploiting). Re-spawn and try again.
+<br/> * Ammo resupply vehicles are used for resupply, NOT for spamming. If you are caught spamming while using an ammo vehicle, this is considered an exploit, you will be banned from the server.
+<br/> * No combat logging. If you are caught doing this you will face punishment. If you log off and come back in a brief amount of time to gain an advantage we will punish you. You may not log off while a (Sugar Daddy/HVT) after completing a (Hackers) mission type, doing so will result in punishment.
+<br/> * Ghosting is forbidden. This means changing teams with players in the area with the intent to come back and kill them. This also applies to Independent groups kicking and killing other players.
+"
+]];
+
+player createDiaryRecord ["Rules",
+[
+"Game Server Rules",
+"
+<br/> * (These rules apply to any server owned by UXO Gaming, this is to include any server that has been approved to be a UXO Gaming server while being owned by someone other than Server Owners or Founders) Failure to follow these rules can and or will result in a kick/ban, with or without warning.
+<br/> * 0 Tolerance for Cheating, Hacking, or Exploiting, regardless of the game. Doing so will result in a ban from anything owned by UXO.
+<br/> * DO NOT harass any player on the server you are playing on. We understand people rage, but as soon as you get out of hand you will be told to stop. If you do not stop, you will be banned from the server.
+<br/> * If you are on a server where voting to be an Admin is enabled, DO NOT vote anyone to be an Admin UNLESS there is no available Admin on-line, in which case you are only allowed to vote UXO Gaming Members as Admins. If neither is on the server, please post any concerns on the forums.
+<br/> * DO NOT abuse the vote kick system implemented on servers, doing so will result in an immediate ban.
+<br/> * Admins can and will ban at their own discretion. If you were banned and would like to appeal it. You can do it on the forums @ https://UXO-Gaming.com/
+<br/> * If you want to suggest a change on the server post it in the appropriate forum area (Suggestions) that pertains to your game
+"
+]];
+
+player createDiaryRecord ["Rules",
+[
+"Community Rules",
+"
+<br/> * (These rules apply to anything owned by UXO Gaming, to include Discord Server, Website/Forums, and Game Servers.) Failure to follow these rules will result in an immediate ban
+<br/>
+<br/> * If members or staff of UXO Gaming do not like you for reasons that seem legit, you will be confronted and/or banned from our community. If you are already a member this rule still applies to you.
+<br/> * 0 tolerance policy for racism, religionism, sexism, or heterosexism (if it wasn't clear this obviously includes homophobia).This is to include using any words that fall under any of the categories listed in the rule above.
+<br/> * Respect our staff, running UXO is a job we don't get paid for. We don't have to have our servers, but we do.
+<br/> * Respect our members, although in a lot of communities members are just another number, here at UXO Gaming our members are our family. They are what make the community.
+<br/> * All names must match on the forums, Discord, and Game Servers prior to applying to be a member of our community.
+<br/> * DO NOT put [FRAC] in your name at all. This is a title granted by Server Owners, Founders, Admins, and Recruiters.
+<br/> * No trolling. We understand what jokes are. But if it seems your jokes are too much, you will be confronted and/or banned.
+<br/> * Members under the age of 18 are allowed in the community. Minors have no exemptions from our rules.
+<br/> * NO ADVERTISING any other Discord or community/clan/guild. We work hard enough to keep UXO up. We don't need people leeching off our community. We didn't do it, you don't need to.
+<br/> * If you own your own server DO NOT tag it with UXO, UXO Gaming, or anything made by UXO until given permission by a Server Owner. (Mokey). If granted this permission, your server must follow ALL rules of UXO Gaming. NO EXCEPTIONS!
+<br/> * Donations are greatly appreciated (located on the main page https://UXO-gaming.com however, donations WILL NOT grant you any more power than what you already have.
 "
 ]];

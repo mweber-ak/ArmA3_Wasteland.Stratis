@@ -9,7 +9,7 @@ diag_log format["Loading vehicle misc functions ..."];
 A3W_fnc_unflip = {
   ARGVX3(0,_object,objNull);
   ARGVX3(1,_vector,[]);
-  
+
   def(_pos);
   _object allowDamage false;
   _pos = getPos _object;
@@ -17,11 +17,11 @@ A3W_fnc_unflip = {
   _object setPos _pos;
   _object setVectorUp _vector;
   [_object] spawn {
-    sleep 1;
+    sleep 5;
     ARGVX3(0,_object,objNull);
     _object allowDamage true;
   };
-  
+
 } call mf_compile;
 
 A3W_fnc_lock  = {
@@ -30,7 +30,7 @@ A3W_fnc_lock  = {
   ARGVX3(1,_right,0);
   _left lock _right;
   _left setVariable ["lockState", _right, true];
-  
+
   def(_locked);
   _locked = (_right == 2 || {_right == 3});
   _left setVariable ["objectLocked", _locked, true];
@@ -45,21 +45,6 @@ generic_picture_path = {
 generic_display_name = {
   ARGVX3(0,_id,"");
   ([_id, "displayName"] call generic_config_text)
-};
-
-generic_display_name_variant = {
-  params [["_class","",[""]], ["_variant","",[""]]];
-  private _name = "";
-
-  {
-    if (_class == _x select 1 && (_variant == "" || {_variant in _x})) exitWith
-    {
-      _name = _x select 0;
-    };
-  } forEach (call allVehStoreVehicles + call staticGunsArray);
-
-  if (_name == "") exitWith { [_class] call generic_display_name };
-  _name
 };
 
 generic_icon_path = {
@@ -99,7 +84,7 @@ generic_config_text = {
 str_truncate = {
   ARGVX4(0,_str,"","...");
   ARGVX4(1,_max,0,"...");
-  
+
  _str = if ((count _str) > _max) then { (_str select [0, _max - 3]) + "..."} else {_str};
  (_str)
 };
@@ -107,5 +92,3 @@ str_truncate = {
 va_misc_functions_loaded = true;
 
 diag_log format["Loading vehicle misc functions complete"];
-
-

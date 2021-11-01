@@ -9,7 +9,7 @@
  *   [_debug]: Optional. true if debug text is to be shown, otherwise false.
  */
 
-params [["_initialFog",-1,[0]], ["_initialOvercast",-1,[0]], ["_initialRain",-1,[0]], ["_initialWind",[],[[]]], ["_debug",false,[false]]]; 
+params [["_initialFog",-1,[0]], ["_initialOvercast",-1,[0]], ["_initialRain",-1,[0]], ["_initialWind",[],[[]]], ["_debug",false,[false]]];
 
 private ["_minWeatherChangeTimeMin", "_maxWeatherChangeTimeMin", "_minTimeBetweenWeatherChangesMin", "_maxTimeBetweenWeatherChangesMin", "_rainIntervalRainProbability", "_windChangeProbability"];
 private ["_minimumFog", "_maximumFog", "_minimumOvercast", "_maximumOvercast", "_minimumRain", "_maximumRain", "_minimumWind", "_maximumWind", "_minRainIntervalTimeMin", "_maxRainIntervalTimeMin", "_forceRainToStopAfterOneRainInterval", "_maxWind"];
@@ -42,7 +42,7 @@ _minimumFog = 0;
 
 // Fog intensity never exceeds this value. Must be between 0 and 1 and greater than or equal to _minimumFog
 // (0 = no fog, 1 = pea soup). (Suggested value: 0.2).
-_maximumFog = 0.2;
+_maximumFog = 0;
 
 // New ArmA3 facilities added by Bewilderbeest - not currently taken into account due to engine syncing bugs and weird behavior
 _minimumFogDecay = 0.0;
@@ -60,11 +60,11 @@ _maximumOvercast = 1;
 
 // When raining, rain intensity never falls below this value. Must be between 0 and 1 and less than or equal to _maximumRain
 // (0 = no rain, 1 = maximum rain intensity). (Suggested value: 0.1);
-_minimumRain = 0.1;
+_minimumRain = 0;
 
 // When raining, rain intensity never exceeds this value. Must be between 0 and 1 and greater than or equal to _minimumRain
 // (0 = no rain, 1 = maximum rain intensity). (Suggested value: 1);
-_maximumRain = 1;
+_maximumRain = 0.05;
 
 // Wind vector strength never falls below this value. Must be greater or equal to 0 and less than or equal to _maximumWind.
 // (Suggested value: 0);
@@ -72,7 +72,7 @@ _minimumWind = 0;
 
 // Wind vector strength never exceeds this value. Must be greater or equal to 0 and greater than or equal to _minimumWind.
 // (Suggested value: 5).
-_maximumWind = 5;
+_maximumWind = 1;
 
 // Probability in percent for wind to change when weather changes. If set to 0 then wind will never change. If set to 100 then rain will
 // change every time the weather (fog or overcast) start to change. (Suggested value: 25);

@@ -22,7 +22,7 @@ _display = (findDisplay TOParmaInfo_dialog);
 _serverInfoText = _display displayCtrl TOParmaInfo_Server_Info;
 if (!hasInterface) then
 {
-	_serverInfoString = format ["<t color='#A0FFFFFF'>Fractured Wasteland #%1 %2</t>", call A3W_extDB_ServerID, worldName];
+	_serverInfoString = format ["<t color='#A0FFFFFF'>UXO Wasteland #%1 %2</t>", call A3W_extDB_ServerID, worldName];
 }
 else
 {
@@ -31,7 +31,7 @@ else
 _serverInfoText ctrlSetStructuredText parseText _serverInfoString;
 
 _generalInfoText = _display displayCtrl TOParmaInfo_General_Info_BG;
-_generalInfoString = "Website: <t color='#0091CD'><a href='https://www.Fractured-Gaming.Com'>Fractured-Gaming.</a></t> Forums: <t color='#0091CD'><a href='https://forum.fractured-gaming.com/'>Fractured-Gaming Forums</a></t> DISCORD: Discord.Frac.gg";
+_generalInfoString = "DISCORD: discord.gg/4qqWCm8ZQs";
 _generalInfoText ctrlSetStructuredText parseText _generalInfoString;
 
 

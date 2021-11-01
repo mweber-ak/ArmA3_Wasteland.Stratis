@@ -15878,7 +15878,7 @@ class Mission
 			dataType="Marker";
 			position[]={4052.2114,0,1573.7888};
 			name="marker_158";
-			text="Donate @ www.Fractured-Gaming.com/donations/";
+			text="Donate @ Discord";
 			type="mil_dot";
 			colorName="ColorPink";
 			id=1183;
@@ -15900,7 +15900,7 @@ class Mission
 			dataType="Marker";
 			position[]={4051.3918,0,1454.9885};
 			name="marker_160";
-			text="Gear Level Info/Apps @ Forum.Fractured-Gaming.com";
+			text="Gear Level Info/Apps @ Discord.com";
 			type="mil_objective";
 			colorName="ColorGUER";
 			id=1187;

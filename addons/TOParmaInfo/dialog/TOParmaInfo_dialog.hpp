@@ -32,7 +32,7 @@ class TOParmaInfoD
 		class TAInfoTitle: RscText
 		{
 			idc = 10032;
-			text = "Fractured Gaming";
+			text = "UXO Gaming";
 			colorBackground[] = {0,0,0,0.8};
 			x = "0 * (((safezoneW / safezoneH) min 1.2) / 40)";
 			y = "0 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
@@ -44,7 +44,7 @@ class TOParmaInfoD
 			idc = TOParmaInfo_Server_Info;
 			type = CT_STRUCTURED_TEXT;
 			size = 0.040;
-			text = "Fractured Wasteland";
+			text = "UXO Wasteland";
 			x = "18 * (((safezoneW / safezoneH) min 1.2) / 40)";
 			y = "0 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
 			w = "12 * (((safezoneW / safezoneH) min 1.2) / 40)";
@@ -58,7 +58,7 @@ class TOParmaInfoD
 			idc = TOParmaInfo_General_Info_BG;
 			type = CT_STRUCTURED_TEXT;
 			size = 0.030;
-			text = "Website: Fractured-Gaming.com Discord: discord.frac.gg";
+			text = "Discord: discord.gg/4qqWCm8ZQs";
 			x = "0 * (((safezoneW / safezoneH) min 1.2) / 40)";
 			y = "1.1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
 			w = "30 * (((safezoneW / safezoneH) min 1.2) / 40)";
@@ -103,7 +103,7 @@ class TOParmaInfoD
 		class TAStatsTiTleBackground: RscText
 		{
 			idc = TOParmaInfo_Stats_Title_BG;
-			text = "Fractured Gaming Servers";
+			text = "UXO Gaming Servers";
 			x = "15.1 * (((safezoneW / safezoneH) min 1.2) / 40)";
 			y = "9.7 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
 			w = "14.9 * (((safezoneW / safezoneH) min 1.2) / 40)";

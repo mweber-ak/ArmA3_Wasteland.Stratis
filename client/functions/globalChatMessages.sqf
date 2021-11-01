@@ -35,16 +35,15 @@ _globalChatPrefix = "FRACbot";
 _globalChatMessagesSleep = 30*60; // 30 minutes sleep per full loop.
 
 _globalChatMessages = [
-    ["You are playing on Fractured's A3Wasteland Stratis server.",120],
+    ["You are playing on UXO's A3Wasteland Stratis server.",120],
     ["Discord -> discord.frac.gg",120],
-    ["Website -> Fractured-Gaming.com",120],
     ["Server restarts are at 6am, 12pm, 6pm and 12am daily (CST).",10],
     ["We also have a Malden Server. Have no fear, all gear and money transfer!",120],
     ["Gearlevel Information -> Can be found in the map menu.",120],
     ["You can view your stats or anyone elses stats -> stats.frac.gg ",120],
-    ["If you encounter a bug, please post it on the forums -> forums.fractured-gaming.com .",120],
+    ["If you encounter a bug, please post it on the discord -> discord.gg/4qqWCm8ZQs .",120],
     ["Servers cost money, and they aint cheap! Donate -> donate.frac.gg",120],
-    ["Want to be a FRAC Member? Apply on the forums!.",120],
+    ["Want to be a UXO Member? Apply on the discord!.",120],
     ["Server Rules:",1],
     ["NO Hacking, Cheating or Exploiting!",30],
     ["NO Racism, Heterosexism, or Bashing Religion! This is to include the terminology.",30],

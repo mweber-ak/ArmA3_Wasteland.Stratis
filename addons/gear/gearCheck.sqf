@@ -40,8 +40,8 @@ switch (_gearLevel) do
     case 13: { player call va_fnc_gearLevel13; sleep 5; hint format ["Congrats! Your Prestige Level %1 Gear Loaded.",_gearLevel - 10]; };
     case 14: { player call va_fnc_gearLevel14; sleep 5; hint format ["Congrats! Your Prestige Level %1 Gear Loaded.",_gearLevel - 10]; };
     case 15: { player call va_fnc_gearLevel15; sleep 5; hint format ["Congrats! Your Prestige Level %1 Gear Loaded (Virtual Arsenal).",_gearLevel - 10]; waitUntil {(isNil "va_var_gearCheckInProgress")};}; // see \client\init.sqf arsenalOpened/arsenalClosed event handlers.
-    case 16: { player call va_fnc_gearLevel16; sleep 5; hint format ["Congrats! Your Member Level %1 Gear Loaded (Fractured Gaming Event).",_gearLevel - 10]; };
-    default { hint "Check The Map Info To Learn More About Gear Levels Or Visit www.Fractured-Gaming.com"; };
+    case 16: { player call va_fnc_gearLevel16; sleep 5; hint format ["Congrats! Your Member Level %1 Gear Loaded (UXO Gaming Event).",_gearLevel - 10]; };
+    default { hint "Check The Map Info To Learn More About Gear Levels Or Visit Discord"; };
 };
 
 va_var_gearCheckInProgress = nil;

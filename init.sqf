@@ -15,6 +15,7 @@
 #endif
 
 enableSaving [false, false];
+
 A3W_sessionTimeStart = diag_tickTime;
 
 _descExtPath = str missionConfigFile;
@@ -88,6 +89,7 @@ if (hasInterface || isServer) then
 {
 	//init 3rd Party Scripts
 	[] execVM "addons\parking\functions.sqf";
+	[] execVM "addons\resupplyVehicles\resupplyVehicles.sqf";
 	[] execVM "addons\storage\functions.sqf";
 	[] execVM "addons\vactions\functions.sqf";
 	[] execVM "addons\R3F_ARTY_AND_LOG\init.sqf";
@@ -96,13 +98,29 @@ if (hasInterface || isServer) then
 	[] execVM "addons\outlw_magrepack\MagRepack_init.sqf";
 	[] execVM "addons\lsd_nvg\init.sqf";
 	[] execVM "addons\stickyCharges\init.sqf";
+	[] execVM "addons\HvT\HvT.sqf";
+	[] execVM "addons\scripts\servercredits.sqf";
+	[] execVM "addons\laptop\init.sqf";
+	[] execVM "addons\Grenades\ToxicGas.sqf";
+	[] execVM "addons\outOfBounds\outOfBoundsPlayer.sqf";
+  	[] execVM "addons\outOfBounds\outOfBoundsHeli.sqf";
+  	[] execVM "addons\outOfBounds\outOfBoundsPlane.sqf";
+  	[] execVM "addons\outOfBounds\outOfBoundsShip.sqf";
+  	[] execVM "addons\outOfBounds\outOfBoundsLandVehicle.sqf";
+  	[] execVM "addons\outOfBounds\outOfBoundsRemote.sqf";
+	[] execVM "addons\Fuel\Fuelconsumption.sqf";
+	[] execVM "addons\FSNVG\fullScreenNightVision.sqf";
+	[] execVM "addons\carpetBomb\GOM_fnc_carpetBombing.sqf";
+	[] execVM "addons\overRideOptics\overRideLauncherOptics.sqf";
 	if (isNil "drn_DynamicWeather_MainThread") then { drn_DynamicWeather_MainThread = [] execVM "addons\scripts\DynamicWeatherEffects.sqf" };
 };
 
 // Remove line drawings from map
 (createTrigger ["EmptyDetector", [0,0,0], false]) setTriggerStatements
 [
-	"!triggerActivated thisTrigger", 
+	"!triggerActivated thisTrigger",
 	"thisTrigger setTriggerTimeout [30,30,30,false]",
 	"{if (markerShape _x == 'POLYLINE') then {deleteMarker _x}} forEach allMapMarkers"
 ];
+
+"RM_DISPLAYTEXT_PUBVAR" addPublicVariableEventHandler {(_this select 1) spawn BIS_fnc_dynamicText;};

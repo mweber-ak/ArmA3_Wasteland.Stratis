@@ -8,6 +8,24 @@ The mission has come a long way since 404 Wasteland. A large portion of the code
 
 For questions and support, please visit our [forums](http://forums.a3wasteland.com/).
 
+# Workload, Bugs, issues
+
+- [] Template all missions properly
+- [] Change Server so it can be ran in MP mode on Eden Editor
+- [x] Fix Money missions
+      -Reverted back to static amounts
+- [] Update Various bugs && Changes in missions
+  - [] Crates destroying
+  - [] RedDawn Mission, have units patrol map after landing, skipping empty towns.
+- [] Donator VIP store (Cosmetics Only)
+  - [] Create new vehicle/clothing textured.
+- [] Replace FG Icon for Gear Levels
+- [] Fix Gear Levels
+
+# List of addons to be worked on.
+
+- [] Fast rope
+
 ---
 
 #### Team A3W developers

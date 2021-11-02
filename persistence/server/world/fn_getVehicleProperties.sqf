@@ -93,7 +93,7 @@ private _locked = 1 max locked _veh; // default vanilla state is always 1, so we
 _textures = [];
 private _texturesVar = _veh getVariable ["A3W_objectTextures", []];
 
-if (_texturesVar isEqualType "") then // TextureSource
+if (_texturesVar isEqualTypeAll "") then // TextureSource
 {
 	_textures = _texturesVar;
 }
@@ -104,28 +104,25 @@ else // texture paths
 	private _missionDirLen = count _missionDir;
 	private _addTexture =
 	{
-		if (!isNil "_x") then
+		_tex = _x select 1;
+
+		if (_tex select [0, _missionDirLen] == _missionDir) then
 		{
-			_tex = _x;
-
-			if (_tex select [0, _missionDirLen] == _missionDir) then
-			{
-				_tex = _tex select [_missionDirLen]; // exclude mission dir from path
-			};
-
-			if (_doubleBSlash) then
-			{
-				_tex = (["","\\"] select (_tex select [0,1] == "\")) + (_tex splitString "\" joinString "\\");
-			};
-
-			[_textures, _tex, [_forEachIndex]] call fn_addToPairs;
+			_tex = _tex select [_missionDirLen]; // exclude mission dir from path
 		};
+
+		if (_doubleBSlash) then
+		{
+			_tex = (["","\\"] select (_tex select [0,1] == "\")) + (_tex splitString "\" joinString "\\");
+		};
+
+		[_textures, _tex, [_x select 0]] call fn_addToPairs;
 	};
 
 	// vehicle has at least 2 random textures, save everything
 	if (count getArray (_vehCfg >> "textureList") >= 4) then
 	{
-		_addTexture forEach getObjectTextures _veh;
+		{ _x = [_forEachIndex, _x]; call _addTexture } forEach getObjectTextures _veh;
 	}
 	else // only save custom ones
 	{
@@ -155,20 +152,20 @@ if (_class call fn_hasInventory) then
 
 // _turretMags is deprecated, leave empty
 _turretMags = []; // magazinesAmmo _veh;
-_turretMags2 = (magazinesAllTurrets _veh) select {_x select 0 != "FakeWeapon" && !isText (configFile >> "CfgMagazines" >> (_x select 0) >> "pylonWeapon")} apply {_x select [0,3]};
+_turretMags2 = (magazinesAllTurrets _veh) select {_x select 0 != "FakeWeapon" && (_x select 0) select [0,5] != "Pylon"} apply {_x select [0,3]};
 _turretMags3 = _veh call fn_getPylonsAmmo;
 
 // deprecated
 /*
+
 _hasDoorGuns = isClass (_vehCfg >> "Turrets" >> "RightDoorGun");
 
-_turrets = allTurrets [_veh, false];
 
+_turrets = allTurrets [_veh, false];
 if !(_class isKindOf "B_Heli_Transport_03_unarmed_F") then
 {
 	_turrets = [[-1]] + _turrets; // only add driver turret if not unarmed Huron, otherwise flares get saved twice
 };
-
 if (_hasDoorGuns) then
 {
 	// remove left door turret, because its mags are already returned by magazinesAmmo
@@ -178,13 +175,10 @@ if (_hasDoorGuns) then
 			_turrets set [_forEachIndex, 1];
 		};
 	} forEach _turrets;
-
 	_turrets = _turrets - [1];
 };
-
 {
 	_path = _x;
-
 	{
 		if ([_turretMags, _x, -1] call fn_getFromPairs == -1 || _hasDoorGuns) then
 		{

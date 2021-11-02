@@ -9,7 +9,9 @@
 _pos = _pos apply { if (_x isEqualType "") then { parseNumber _x } else { _x } };
 
 private _isUAV = (round getNumber (configFile >> "CfgVehicles" >> _class >> "isUav") > 0);
-private _flying = (!isNil "_flying" && {_flying > 0});
+
+private ([["_flying"],[]] select isNil "_flying");
+_flying = (!isNil "_flying" && {_flying > 0});
 
 private _special = ["NONE","FLY"] select (_isUAV && _flying);
 private _tempPos = +_pos;
@@ -57,7 +59,6 @@ private _uavAuto = true;
 		case "ownerName":
 		{
 			if (_val isEqualType []) then { _val = toString _val };
-			if !(_val in ["", "Error: No unit", "Error: No vehicle"]) then { _veh setPlateNumber _val };
 		};
 		case "uavSide":
 		{
@@ -88,7 +89,7 @@ if (_isUAV) then
 		};
 
 		_veh setVelocity _vel;
-		_veh flyInHeight ((_veh modelToWorld [0,0,0]) select 2);
+		_veh flyInHeight (((_veh call fn_getPos3D) select 2) max 500);
 	};
 
 	//assign AI to the vehicle so it can actually be used
@@ -130,8 +131,7 @@ if (!isNil "_textures") then
 {
 	_veh setVariable ["BIS_enableRandomization", false, true];
 
-	if (_textures isEqualType "") then { _textures = [_textures] }; // assume TextureSource
-	if (_textures isEqualTypeArray [""]) then // TextureSource
+	if (_textures isEqualTypeAll "") then // TextureSource
 	{
 		[_veh, _textures] call applyVehicleTexture;
 	}
@@ -150,7 +150,7 @@ if (!isNil "_textures") then
 
 			{
 				_veh setObjectTextureGlobal [_x, _texture];
-				_objTextures set [_x, _texture];
+				[_objTextures, _x, _texture] call fn_setToPairs;
 			} forEach (_x select 1);
 		} forEach _textures;
 
@@ -197,7 +197,7 @@ if (!isNil "_backpacks") then
 	{
 		_x params ["_bpack"];
 
-		if (!(_bpack isKindOf "Weapon_Bag_Base") || {[["_UAV_","_UGV_","_Designator_"], _bpack] call fn_findString != -1}) then
+		if (!(_bpack isKindOf "Weapon_Bag_Base") || {[["_UAV_","_Designator_"], _bpack] call fn_findString != -1}) then
 		{
 			_veh addBackpackCargoGlobal _x;
 		};
@@ -227,7 +227,7 @@ if (!isNil "_turretMags3") then
 	{
 		_x params ["_mag", "_path", "_ammoCoef"];
 
-		if (_mag == "" || isText (configFile >> "CfgMagazines" >> _mag >> "pylonWeapon")) then // pylon stuff
+		if (_mag == "" || _mag select [0,5] == "Pylon") then // pylon stuff
 		{
 			_pylons pushBack _x;
 		}
